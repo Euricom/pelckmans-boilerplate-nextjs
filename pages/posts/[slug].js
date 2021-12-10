@@ -8,21 +8,23 @@ export default function Post({ post: { body, meta } }) {
     <article>
       <h1>{meta.title}</h1>
       <h3>{meta.date}</h3>
-      <div className={styles.thumbnail}>
-        <Image
-          width="100%"
-          height="100%"
-          layout="responsive"
-          src={meta.thumbnail}
-          alt={meta.title + " thumbnail"}
-        />
-      </div>
+      {meta && !!meta.thumbnail && (
+        <div className={styles.thumbnail}>
+          <Image
+            width="100"
+            height="100"
+            layout="responsive"
+            src={meta.thumbnail}
+            alt={meta.title + " thumbnail"}
+          />
+        </div>
+      )}
       <section>
         <ReactMarkdown>{body}</ReactMarkdown>
       </section>
     </article>
   );
-};
+}
 
 export async function getStaticProps({ params }) {
   const postsCollection = new CollectionService("posts");
@@ -49,7 +51,7 @@ export const getStaticPaths = async () => {
   // fetch all slugs to pre-render the paths on build time
   const paths = postsCollection
     .getAllItems()
-    .map((slug) => ({ params: { slug } }));
+    .map((slug) => ({ params: { slug: slug.label } }));
 
   return {
     paths,
