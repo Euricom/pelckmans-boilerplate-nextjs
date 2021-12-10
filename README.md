@@ -21,12 +21,13 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 ## To get up and running with the local CMS
 
 ```bash
+# This starts the local netlify-cms-proxy
  npx netlify-cms-proxy-server
 ```
 Open [http://localhost:3000/admin/index.html](http://localhost:3000/admin/index.html) with your 
-browser and start adding a blog post. 
+browser and start adding a blog post.
 
-The blogposts can be viewed through /posts/[project-slug)here]
+The blogposts can be viewed through **/posts/(slug-here)**
 
 ## Learn More
 
