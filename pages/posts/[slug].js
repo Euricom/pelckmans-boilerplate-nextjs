@@ -1,6 +1,5 @@
-import fs from 'fs';
-import matter from 'gray-matter';
 import { join } from 'path';
+import CollectionService from '../../services/collection.service';
 
 const POSTS_PATH = join(process.cwd(), 'cms', 'collections', 'posts');
 
@@ -19,10 +18,8 @@ const Post = ({ post: { body, meta } }) => {
 }
 
 export async function getStaticProps({ params }) {
-  const fetchPostData = (url) => {
-    return matter(fs.readFileSync(url, 'utf8'))
-  }
-  const { content: body, data: meta } = fetchPostData(`${POSTS_PATH}/${params.slug}.md`);
+  const postsCollection = new CollectionService('posts')
+  const { body, meta } = postsCollection.getItem(params.slug);
 
   return {
     props: {
@@ -35,10 +32,9 @@ export async function getStaticProps({ params }) {
 }
 
 export const getStaticPaths = async () => {
-  const paths = fs
-   .readdirSync(POSTS_PATH)
-   // Remove file extensions for page paths
-   .map((path) => path.replace(/\.md?$/, ''))
+  const postsCollection = new CollectionService('posts')
+  // fetch all slugs to pre-render the paths on build time
+  const paths = postsCollection.getAllItems()
    .map((slug) => ({ params: { slug } }));
 
   return {
