@@ -1,24 +1,31 @@
-import { useRouter } from 'next/router'
 import fs from 'fs';
+import matter from 'gray-matter';
 import { join } from 'path';
 
 const POSTS_PATH = join(process.cwd(), 'cms', 'collections', 'posts');
 
-const Post = (data) => {
-  console.log(data);
-  const router = useRouter()
-  const { slug } = router.query
-
-  return <article>Post: {slug}</article>
+const Post = ({ post: { body, meta } }) => {
+  return <article>
+    <h1>{meta.title}</h1>
+    <h3>{meta.date}</h3>
+    <img
+     style={{ maxWidth: '300px' }}
+     src={meta.thumbnail}
+     alt={meta.title + ' thumbnail'}/>
+    <section>
+      {body}
+    </section>
+  </article>
 }
 
 export async function getStaticProps({ params }) {
-  //TODO:: read and convert .md files to content
-  const post = {title: 'testing title'}
+  const fetchPostData = (url) => {
+    return matter(fs.readFileSync(url, 'utf8'))
+  }
+  const { content: body, data: meta } = fetchPostData(`${POSTS_PATH}/${params.slug}.md`);
 
-  return { props: { post } }
+  return { props: { post: { body, meta: { ...meta, date: meta.date.toJSON() } } } }
 }
-
 
 export const getStaticPaths = async () => {
   const paths = fs
@@ -29,7 +36,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: false
   };
 };
 
