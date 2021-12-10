@@ -18,6 +18,16 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
+## To get up and running with the local CMS
+
+```bash
+ npx netlify-cms-proxy-server
+```
+Open [http://localhost:3000/admin/index.html](http://localhost:3000/admin/index.html) with your 
+browser and start adding a blog post. 
+
+The blogposts can be viewed through /posts/[project-slug)here]
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

@@ -12,10 +12,11 @@ export default function Home({ project }) {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Deze website is van het type [{project.type}] en met het thema [
-          {project.theme}]
-        </h1>
+        <h1 className={styles.title}>Welkom!</h1>
+        <h3>Deze website is van het type *{project.type} met theme [
+          {project.theme}]</h3>
+        <p>Bezoek <a href="/admin/index.html">/admin</a> om content toe te voegen! <br/>
+        Done? Dan zie je hieronder de oplijsting van de toegevoegde posts.. ;)</p>
       </main>
 
       <footer className={styles.footer}>

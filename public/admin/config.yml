@@ -7,13 +7,16 @@ publish_mode: editorial_workflow
 
 collections:
   - name: "post"
+    identifier_field: slug
     label: "Blog post"
     folder: "cms/collections/posts"
     create: true
-    slug: "{{slug}}"
+    slug: "{{fields.slug}}"
     fields:
       - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
       - {label: "Title", name: "title", widget: "string"}
+      - {label: "Url", name: "slug", widget: "string", hint: "This will be used to access the 
+      post in the UI. Ex. posts/slug-1", default: 'slug-x'}
       - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Featured Image", name: "thumbnail", widget: "image"}
+      - {label: "Featured Image", name: "thumbnail", widget: "image", required: false}
       - {label: "Body", name: "body", widget: "markdown"}

@@ -24,7 +24,14 @@ export async function getStaticProps({ params }) {
   }
   const { content: body, data: meta } = fetchPostData(`${POSTS_PATH}/${params.slug}.md`);
 
-  return { props: { post: { body, meta: { ...meta, date: meta.date.toJSON() } } } }
+  return {
+    props: {
+      post: {
+        body: body,
+        meta: { ...meta, date: meta.date.toJSON() }
+      }
+    }
+  }
 }
 
 export const getStaticPaths = async () => {
