@@ -1,7 +1,5 @@
-import { join } from 'path';
 import CollectionService from '../../services/collection.service';
-
-const POSTS_PATH = join(process.cwd(), 'cms', 'collections', 'posts');
+import ReactMarkdown from 'react-markdown';
 
 const Post = ({ post: { body, meta } }) => {
   return <article>
@@ -12,7 +10,7 @@ const Post = ({ post: { body, meta } }) => {
      src={meta.thumbnail}
      alt={meta.title + ' thumbnail'}/>
     <section>
-      {body}
+      <ReactMarkdown>{body}</ReactMarkdown>
     </section>
   </article>
 }
