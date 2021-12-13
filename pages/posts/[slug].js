@@ -30,17 +30,11 @@ export async function getStaticProps({ params }) {
   const postsCollection = new CollectionService("posts");
   const { body, meta } = postsCollection.getItem(params.slug);
 
-  if (!body || !meta) {
-    return {
-      notFound: true,
-    };
-  }
-
   return {
     props: {
       post: {
-        body: body,
-        meta: { ...meta, date: meta.date.toJSON() },
+        body,
+        meta,
       },
     },
   };
@@ -49,10 +43,7 @@ export async function getStaticProps({ params }) {
 export const getStaticPaths = async () => {
   const postsCollection = new CollectionService("posts");
   // fetch all slugs to pre-render the paths on build time
-  const paths = postsCollection
-    .getAllItems()
-    .map((slug) => ({ params: { slug: slug.label } }));
-
+  const paths = postsCollection.getAllPaths();
   return {
     paths,
     fallback: false,

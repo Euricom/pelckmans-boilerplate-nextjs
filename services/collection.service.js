@@ -10,16 +10,21 @@ class CollectionService {
   constructor(collectionName) {
     this.name = collectionName;
   }
+  getAllPaths() {
+    const fileNames = fs.readdirSync(this.getCollectionPath());
 
-  getAllItems(stripExtension = true) {
-    const itemize = (path) => ({
-      label: stripExtension ? path.replace(/\.md?$/, "") : path,
-      url: `${this.getCollectionPath()}/${path}`,
+    return fileNames.map((fileName) => {
+      return {
+        params: {
+          slug: fileName.replace(/\.md$/, ""),
+        },
+      };
     });
-    const items = fs
-      .readdirSync(this.getCollectionPath())
-      .map((path) => itemize(path));
-    console.log(items);
+  }
+  getAllItems() {
+    const items = fs.readdirSync(this.getCollectionPath()).map((path) => {
+      return this.getItem(path.replace(/\.md?$/, ""));
+    });
 
     return items;
   }
@@ -32,8 +37,13 @@ class CollectionService {
 
   getItem(slug) {
     const url = `${this.getCollectionPath()}/${slug}.md`;
-    const { content, data } = matter(fs.readFileSync(url, "utf8"));
-    return { body: content, meta: data };
+    const { content, data: meta } = matter(fs.readFileSync(url, "utf8"));
+
+    return {
+      body: content,
+      meta: { ...meta, date: meta.date.toJSON() },
+      filename: `${slug}`,
+    };
   }
 
   static getRootCollectionPath() {

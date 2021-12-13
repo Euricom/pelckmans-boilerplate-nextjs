@@ -30,15 +30,20 @@ export default function Home({ project, posts }) {
           voegen. <br /> Zodra dat gebeurt zie je hieronder de posts
           verschijnen.{" "}
         </p>
-        {posts.map((post, idx) => (
-          <div
-            key={idx}
-            className={styles.card}
-            onClick={() => openPostDetail(post.label)}
-          >
-            {post.label}
-          </div>
-        ))}
+        {posts.map(
+          (
+            { body, filename, meta: { layout, title, slug, date, thumbnail } },
+            idx
+          ) => (
+            <div
+              key={idx}
+              className={styles.card}
+              onClick={() => openPostDetail(filename)}
+            >
+              {title}
+            </div>
+          )
+        )}
       </main>
     </div>
   );
