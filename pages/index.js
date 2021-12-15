@@ -4,6 +4,9 @@ import styles from "../styles/Home.module.css";
 import CollectionService from "../services/collection.service";
 import { useRouter } from "next/router";
 
+
+// TODO :: Add blog layout (bootstrap)
+// TODO :: Beheer knop (CMS) ENKEL tonen als je lokaal draait (proxy)
 export default function Home({ project, posts }) {
   const router = useRouter();
   const openPostDetail = (slug) => {

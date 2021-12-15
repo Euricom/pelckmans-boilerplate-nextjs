@@ -8,7 +8,7 @@ export default function Post({ post: { body, meta } }) {
     <article>
       <h1>{meta.title}</h1>
       <h3>{meta.date}</h3>
-      {meta && !!meta.thumbnail && (
+      {!!meta.thumbnail && (
         <div className={styles.thumbnail}>
           <Image
             width="100"
