@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 
 // TODO :: Add blog layout (bootstrap)
 // TODO :: Beheer knop (CMS) ENKEL tonen als je lokaal draait (proxy)
-export default function Home({ project, posts }) {
+export default function Home({ project, posts, localProxyActive}) {
   const router = useRouter();
   const openPostDetail = (slug) => {
     router.push(`/posts/${slug}`);
@@ -28,11 +28,11 @@ export default function Home({ project, posts }) {
           Deze website is van het type {project.type} met theme
           {project.theme}
         </h3>
-        <p>
+        {localProxyActive ? <p>
           Bezoek <Link href="/admin/index.html">/admin</Link> om content toe te
           voegen. <br /> Zodra dat gebeurt zie je hieronder de posts
           verschijnen.{" "}
-        </p>
+        </p> : null}
         {posts.map(
           (
             { body, filename, meta: { layout, title, slug, date, thumbnail } },
@@ -62,6 +62,7 @@ export async function getStaticProps() {
   };
   return {
     props: {
+      localProxyActive: !!process.env.LOCAL_PROXY,
       project,
       posts,
     },

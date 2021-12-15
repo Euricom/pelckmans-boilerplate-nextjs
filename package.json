@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "concurrently --kill-others \"npx netlify-cms-proxy-server\" \"npm run dev\"",
+    "start": "concurrently --kill-others \"npx netlify-cms-proxy-server\" \" LOCAL_PROXY=true npm run dev\"",
     "lint": "next lint",
     "deploy": "node deploy.js"
   },
