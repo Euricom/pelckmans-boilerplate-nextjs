@@ -4,7 +4,6 @@ import CollectionService from "../../services/collection.service";
 import styles from "../../styles/Post.module.css";
 
 export default function Post({ post: { body, meta } }) {
-  console.log({ meta })
   return (
     <article>
       <h1>{meta.title}</h1>
