@@ -17,7 +17,7 @@ class CollectionService {
       if (path.extname(file) == ".md") {
         fileNames.push({
           params: {
-            slug: fileName.replace(/\.md$/, ""),
+            slug: file.replace(/\.md$/, ""),
           },
         });
       }
