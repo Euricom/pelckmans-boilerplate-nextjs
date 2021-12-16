@@ -11,15 +11,19 @@ class CollectionService {
     this.name = collectionName;
   }
   getAllPaths() {
-    const fileNames = fs.readdirSync(this.getCollectionPath());
+    const fileNames = [];
 
-    return fileNames.map((fileName) => {
-      return {
-        params: {
-          slug: fileName.replace(/\.md$/, ""),
-        },
-      };
+    fs.readdirSync(this.getCollectionPath()).forEach((file) => {
+      if (path.extname(file) == ".md") {
+        fileNames.push({
+          params: {
+            slug: fileName.replace(/\.md$/, ""),
+          },
+        });
+      }
     });
+
+    return fileNames;
   }
   getAllItems() {
     const items = [];

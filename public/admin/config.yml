@@ -4,6 +4,7 @@ local_backend: true
 media_folder: public/images
 public_folder: /images
 publish_mode: editorial_workflow
+display_url: http://localhost:3000
 
 collections:
   - name: "post"
