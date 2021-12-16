@@ -45,7 +45,10 @@ class CollectionService {
       filename: `${slug}`,
     };
   }
-
+  static getImagePath({ src }){
+    // add minification
+    return src
+  }
   static getRootCollectionPath() {
     return path.resolve(process.cwd(), COLLECTION_PATH);
   }

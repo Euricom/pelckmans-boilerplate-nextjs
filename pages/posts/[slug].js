@@ -1,7 +1,6 @@
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import CollectionService from "../../services/collection.service";
-import styles from "../../styles/Post.module.css";
 
 export default function Post({ post: { body, meta } }) {
   return (
@@ -9,10 +8,12 @@ export default function Post({ post: { body, meta } }) {
       <h1>{meta.title}</h1>
       <h3>{meta.date}</h3>
       {!!meta.thumbnail && (
-        <div className={styles.thumbnail}>
+        <div style={{position: 'relative',width: '300px'}}>
           <Image
+            loader={CollectionService.getImagePath}
             width="100"
             height="100"
+           unoptimized={true}
             layout="responsive"
             src={meta.thumbnail}
             alt={meta.title + " thumbnail"}

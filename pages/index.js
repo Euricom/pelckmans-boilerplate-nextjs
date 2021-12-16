@@ -5,15 +5,22 @@ import Grid from '../components/Grid';
 import Layout from '../components/Layout';
 import Post from '../components/Post';
 import CollectionService from '../services/collection.service';
-import styles from '../styles/Home.module.css';
+import styles from '../styles/index.module.scss';
 
-// TODO :: Add blog layout (bootstrap)
-// TODO :: Beheer knop (CMS) ENKEL tonen als je lokaal draait (proxy)
 export default function Home({ project, posts, localProxyActive }) {
   const router = useRouter();
-  const openPostDetail = (slug) => {
+  const openPostHandler = (slug) => {
     router.push(`/posts/${slug}`);
   };
+
+  const CmsInstructions = () => localProxyActive ? <div
+   className="alert alert-info text-xl-center"
+   role="alert">
+    Bezoek <Link href="/admin/index.html">admin</Link> om content toe te
+    voegen. Zodra dat gebeurt zie je hieronder de posts
+    verschijnen.{' '}
+  </div> : null;
+
   return (
    <div className={styles.container}>
      <Head>
@@ -28,27 +35,26 @@ export default function Home({ project, posts, localProxyActive }) {
      </Head>
      <Layout>
        <main className={styles.main}>
-         <h3>
-           Deze website is van het type {project.type} met theme
-           {project.theme}
-         </h3>
-         {localProxyActive ? <p>
-           Bezoek <Link href="/admin/index.html">/admin</Link> om content toe te
-           voegen. <br/> Zodra dat gebeurt zie je hieronder de posts
-           verschijnen.{' '}
-         </p> : null}
-         <Grid>
-           {posts.map(
-            ({ body, filename, meta }, idx) => (
-             <Post
-              key={idx}
-              meta={meta}
-              onClick={() => openPostDetail(filename)}>
-               {body}
-             </Post>
-            )
-           )}
-         </Grid>
+         <section>
+           <h2>
+             Deze website is van het type {project.type} met theme {project.theme}
+           </h2>
+         </section>
+         <section><CmsInstructions/></section>
+         <section>
+           <Grid style={{ maxWidth: '900px', margin: 'auto' }}>
+             {posts.map(
+              ({ body, filename, meta }, idx) => (
+               <Post
+                key={idx}
+                meta={meta}
+                onClick={() => openPostHandler(filename)}>
+               </Post>
+              )
+             )}
+           </Grid>
+         </section>
+
        </main>
      </Layout>
    </div>
