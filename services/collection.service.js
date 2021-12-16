@@ -22,8 +22,11 @@ class CollectionService {
     });
   }
   getAllItems() {
-    const items = fs.readdirSync(this.getCollectionPath()).map((path) => {
-      return this.getItem(path.replace(/\.md?$/, ""));
+    const items = [];
+    fs.readdirSync(this.getCollectionPath()).forEach((file) => {
+      if (path.extname(file) == ".md") {
+        items.push(this.getItem(file.replace(/\.md?$/, "")));
+      }
     });
 
     return items;
@@ -45,9 +48,9 @@ class CollectionService {
       filename: `${slug}`,
     };
   }
-  static getImagePath({ src }){
+  static getImagePath({ src }) {
     // add minification
-    return src
+    return src;
   }
   static getRootCollectionPath() {
     return path.resolve(process.cwd(), COLLECTION_PATH);
