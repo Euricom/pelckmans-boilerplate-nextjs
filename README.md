@@ -2,15 +2,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-Run the command: 
+Run the command:
 
 ```bash
-npm run start
+npm run dev
 # or
-yarn start
+yarn dev
 ```
-This will boot the netlify-proxy server and the project.
 
+This will boot the netlify-proxy server and the project.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
@@ -22,9 +22,9 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 ## To get up and running with the local CMS
 
-If you started the project with `npm run start` or `yarn start` then the local CMS is running.
+If you started the project with `npm run dev` or `yarn dev` then the local CMS is running.
 
-Open [http://localhost:3000/admin/index.html](http://localhost:3000/admin/index.html) with your 
+Open [http://localhost:3000/admin/index.html](http://localhost:3000/admin/index.html) with your
 browser and start adding a blog post.
 
 The blogposts can be viewed through **/posts/(slug-here)**

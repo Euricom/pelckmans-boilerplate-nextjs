@@ -3,9 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build && next export",
-    "start": "concurrently --kill-others \"npx netlify-cms-proxy-server\" \" LOCAL_PROXY=true npm run dev\"",
+    "dev": "concurrently --kill-others \"npx netlify-cms-proxy-server\" \" LOCAL_PROXY=true next dev\"",
     "lint": "next lint",
     "deploy": "node deploy.js"
   },
