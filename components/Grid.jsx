@@ -1,12 +1,14 @@
-import React from 'react';
+import React from "react";
 
-const Grid = ({children, style}) => {
+const Grid = ({ children, style }) => {
+  const childCount = React.Children.count(children);
+  const columns = childCount > 3 ? "3" : childCount;
   return (
-   <div className="row row-cols-2 row-cols-md-3 g-4" style={style}>
-     {React.Children.map(children, child => {
-       return <div className="col">{child}</div>
-     })}
-   </div>
+    <div className={`row row-cols-${columns}`} style={style}>
+      {React.Children.map(children, (child) => {
+        return <div className="col">{child}</div>;
+      })}
+    </div>
   );
 };
 
